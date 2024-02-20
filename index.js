@@ -17,28 +17,23 @@ app.use(cors())
 app.use(morgan('dev'))
 
 
-const connect = async() => {
-    try{
-        await db.authenticate()
-        console.log('connected')
-    }catch(err){
-        console.log('error connection to database')
-    }
-}
-connect()
+// const connect = async() => {
+//     try{
+//         await db.authenticate()
+//         console.log('connected')
+//     }catch(err){
+//         console.log('error connection to database')
+//     }
+// }
+// connect()
 
-app.get('/', async(req, res) => {
-    const user = User.build({user_fname: "ratik", user_lname: "vig", user_email: "ratikvig@gmail.com", user_pwd: "secret11"})
-    await user.save()
-    res.send('home route')
-})
 
 app.use(express.json({
     verify: (req, res, buf, encoding) => {
         try{
-            JSON.parse()
+            JSON.parse(buf)
         }catch(err){
-            res.statusCode(400).json({error: "Invalid request"})
+            res.status(400).json({error: "Invalid request"})
         }
     }
 }))

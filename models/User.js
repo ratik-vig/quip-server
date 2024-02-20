@@ -21,19 +21,12 @@ const User = db.define('User', {
         unique: true
     },
     user_pwd: {
-        type: DataTypes.STRING(64),
-        validate: {
-            is: /^[0-9a-f]{64}$/i
-        }, 
-        allowNull: false
+        type: DataTypes.STRING,
+        allowNull: false 
     }
 }, {
     tableName: 'users' 
-});
+}); 
 
-(async () => {
-    await db.sync({ force: true });
-    // Code here
-  })();
 
 module.exports = { User }
