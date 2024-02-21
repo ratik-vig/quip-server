@@ -16,7 +16,6 @@ const userSignup = async(req, res, next) => {
         }
         const {fname, lname, email, password} = req.body
         const user = await User.findOne({ where: {user_email: email} })
-        console.log(user)
         if(user){
             let err = new Error()
             err.statusCode = 409,

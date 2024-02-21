@@ -3,9 +3,14 @@ const cors = require('cors')
 const dotenv = require('dotenv')
 const morgan = require('morgan')
 
-const userRoutes = require('./routes/user')
+const userRoutes = require('./routes/users')
+const chatRoutes = require('./routes/chats')
+
 const errorHandler = require('./middlewares/errorHandler')
+const auth  = require('./middlewares/auth')
+
 const { db } = require('./config/db.config')
+
 const { User } = require('./models/User')
 
 dotenv.config()
@@ -41,6 +46,9 @@ app.use(express.json({
 const PORT = process.env.PORT || 5002
 
 app.use('/api/v1/users', userRoutes)
+
+app.use(auth)
+app.use('/api/v1/chats', chatRoutes)
 
 app.use(errorHandler)
 
