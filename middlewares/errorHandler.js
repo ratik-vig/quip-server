@@ -3,7 +3,7 @@ const errorHandler = (err, req, res, next) => {
     const errorCode = err.statusCode || 500;
 
     res.status(errorCode).json({errorCode, errors});
-    next();
+    // next();
   };
   
   module.exports = errorHandler;

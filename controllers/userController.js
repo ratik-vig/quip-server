@@ -48,7 +48,7 @@ const userLogin = async (req, res, next) => {
       console.log(user.dataValues)
       if (!user) {
         let err = new Error()
-        err.statusCode = 404,
+        err.statusCode = 401,
         err.errors = [{msg: "User does not exits"}]
         throw err
       }

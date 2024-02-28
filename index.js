@@ -11,34 +11,26 @@ const auth  = require('./middlewares/auth')
 
 const { db } = require('./config/db.config')
 
+// const { Chat } = require('./models/Chat')
 const { User } = require('./models/User')
 
 dotenv.config()
-
+ 
 const app = express()
 
-
+ 
 app.use(cors())
 app.use(morgan('dev'))
-
-
-// const connect = async() => {
-//     try{
-//         await db.authenticate()
-//         console.log('connected')
-//     }catch(err){
-//         console.log('error connection to database')
-//     }
-// }
-// connect()
-
 
 app.use(express.json({
     verify: (req, res, buf, encoding) => {
         try{
             JSON.parse(buf)
         }catch(err){
-            res.status(400).json({error: "Invalid request"})
+            let error = new Error
+            error.statusCode = 403
+            error.errors = [{msg: "Invalid request - JSON cannot be parsed"}]
+            throw error
         }
     }
 }))
