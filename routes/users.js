@@ -1,10 +1,10 @@
 const express = require('express')
-const { userSignup, userLogin } = require('../controllers/userController')
-const { signupRequest, loginRequest } = require('../validators/userValidations')
+const { getUsers } = require('../controllers/userController')
+const { getUsersRequest } = require('../validators/userValidations')
+
 
 const router = express()
 
-router.post('/signup', signupRequest(), userSignup)
-router.post('/login', loginRequest(), userLogin)
+router.get('/getUsers', getUsersRequest(), getUsers)
 
 module.exports = router

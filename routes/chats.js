@@ -6,6 +6,6 @@ const { createChatRequest } = require('../validators/chatValidations')
 const router = express()
 
 router.post('/create', createChatRequest() ,createOrGet)
-router.get('/getByUser/:id', getChatByUser)
+router.get('/getChatsByUser', getChatByUser)
 
 module.exports = router 

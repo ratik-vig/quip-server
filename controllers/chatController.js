@@ -12,13 +12,14 @@ const createOrGet = async(req, res, next) => {
             err.errors = valResult
             throw err
         }
-        const { user1, user2} = req.body
+        const { id } = req.user
+        const { user } = req.body
 
         const checkIfChatExists = await Chat.findOne({ 
             where: {
                 [Op.or]: [
-                    { chat_user1: user1, chat_user2: user2 },
-                    { chat_user1: user2, chat_user2: user1 }
+                    { chat_user1: id, chat_user2: user },
+                    { chat_user1: user, chat_user2: id }
                 ]
             }
         })
@@ -30,7 +31,7 @@ const createOrGet = async(req, res, next) => {
 
         const newChat = await Chat.build({ chat_user1: user1, chat_user2: user2 })
         await newChat.save()
-        res.send(newChat)
+        res.status(201).send(newChat)
 
     }catch(err){
         next(err)
@@ -47,7 +48,7 @@ const getChatByUser = async(req, res, next) => {
             throw err
         }
 
-        const { id }  = req.params
+        const { id }  = req.user
         const chats = await Chat.findAll({ where: {
             [Op.or]: [{ chat_user1: id}, {chat_user2: id}]
         }})
