@@ -12,9 +12,9 @@ const getUsers = async(req, res, next) => {
             err.errors = valResult
             throw err
         }
-        
-        const { email } = req.query
 
+        const { email } = req.query
+        console.log(req)
         const users = await User.findAll({
             where: {
                 user_email: {
