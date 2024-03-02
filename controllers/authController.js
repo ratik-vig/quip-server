@@ -1,7 +1,7 @@
 const { validationResult } = require('express-validator')
 const jwt = require('jsonwebtoken')
 const bycrypt = require('bcryptjs')
-const { User } = require('../models/User')
+const { User } = require('../models')
 
 const salt = bycrypt.genSaltSync(10)
 
@@ -45,7 +45,6 @@ const userLogin = async (req, res, next) => {
   
       const { email, password } = req.body;
       const user = await User.findOne({ where: {user_email: email} });
-      console.log(user.dataValues)
       if (!user) {
         let err = new Error()
         err.statusCode = 401,

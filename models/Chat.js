@@ -20,4 +20,5 @@ const Chat = db.define('Chat', {
     tableName: 'chats' 
 }); 
 
+
 module.exports = { Chat } 

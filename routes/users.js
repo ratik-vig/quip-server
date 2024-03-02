@@ -5,6 +5,6 @@ const { getUsersRequest } = require('../validators/userValidations')
 
 const router = express()
 
-router.get('/getUsers', getUsersRequest(), getUsers)
+router.get('/getUsers', getUsers)
 
 module.exports = router

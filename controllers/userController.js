@@ -1,7 +1,7 @@
 const { validationResult } = require('express-validator')
 const { Op } = require('sequelize')
 
-const { User } = require('../models/User')
+const { User } = require('../models')
 
 const getUsers = async(req, res, next) => {
     const valResult = validationResult(req).array({ onlyFirstError: true });
@@ -12,8 +12,8 @@ const getUsers = async(req, res, next) => {
             err.errors = valResult
             throw err
         }
-
-        const { email } = req.body
+        
+        const { email } = req.query
 
         const users = await User.findAll({
             where: {

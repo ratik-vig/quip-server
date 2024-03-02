@@ -29,14 +29,4 @@ const User = db.define('User', {
     tableName: 'users' 
 }); 
 
-User.hasMany(Chat, {
-    foreignKey: 'chat_user1',
-    as: 'fk_chat_user1' 
-});
-
-User.hasMany(Chat, {
-    foreignKey: 'chat_user2',
-    as: 'fk_chat_user2'
-}); 
-
 module.exports = { User }

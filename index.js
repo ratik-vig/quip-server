@@ -13,7 +13,7 @@ const auth  = require('./middlewares/auth')
 const { db } = require('./config/db.config')
 
 // const { Chat } = require('./models/Chat')
-const { User } = require('./models/User')
+const { User } = require('./models')
 
 dotenv.config()
  
